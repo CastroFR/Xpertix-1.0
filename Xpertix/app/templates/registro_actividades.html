@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<h1 class="text-center my-4">Registro de Actividades</h1>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-hover table-striped shadow-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Acción</th>
+                    <th>Usuario</th>
+                    <th>Fecha y Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for actividad in actividades %}
+                <tr>
+                    <td>{{ actividad.accion }}</td>
+                    <td>{{ actividad.usuario.nombre_usuario if actividad.usuario else "Desconocido" }}</td>
+                    <td>{{ actividad.marca_tiempo.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center text-muted">No hay actividades registradas.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

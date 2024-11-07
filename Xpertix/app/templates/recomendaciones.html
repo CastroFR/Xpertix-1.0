@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<h1 class="titulo">Recomendaciones para el Proyecto: {{ proyecto.titulo }}</h1>
+<div class="contenedor-recomendaciones">
+    <ul class="lista-recomendaciones">
+        {% for recomendacion in recomendaciones %}
+        <li class="recomendacion-item">
+            {{ recomendacion }}
+            <form method="POST" action="{{ url_for('principal.enviar_feedback') }}" class="formulario-feedback">
+                <input type="hidden" name="recomendacion" value="{{ recomendacion }}">
+                <button type="submit" name="utilidad" value="true" class="boton-feedback boton-util">Útil</button>
+                <button type="submit" name="utilidad" value="false" class="boton-feedback boton-no-util">No útil</button>
+            </form>
+        </li>
+        {% else %}
+        <li class="recomendacion-vacia">No hay recomendaciones disponibles para este proyecto.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
